@@ -5,6 +5,7 @@ class CreateEvents < ActiveRecord::Migration[5.1]
       t.date :date, null:false
       t.string :type, null:false
       t.string :location, null:false
+      t.integer :creator_id, foreign_key:true, null:false
 
 
 

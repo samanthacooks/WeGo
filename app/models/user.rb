@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :attendings
-  has_many :events, through: :attendings
+  has_many :created_events, foreign_key: "creator_id", class_name: "Event"
+
   attr_accessor :remember_token, :reset_token
   before_save   :downcase_email
   before_create :generate_access_token
