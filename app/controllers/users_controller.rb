@@ -5,7 +5,7 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
     user = User.find_by(access_token:params[:token]).update_attributes(
       name:params[:name],
       email:params[:email],
-      password:params[:password],)
+      password:params[:password])
       render json: user, status: 200
   end
 
