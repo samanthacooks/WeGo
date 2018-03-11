@@ -1,3 +1,25 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
+  get    'verify'  => 'sessions#verify_access_token'
+  post '/update/:token' => 'users#update'
+  get '/users/:token/edit' => 'users#edit'
+  resources :users, only: [:show, :new, :create, :update, :destroy]
+  resources :password_resets, only: [:new, :create, :edit, :update]
+
+  get '/events/:token' => 'events#index'
+  post '/events/:token' => 'events#create'
+  post '/events/update/:token' => 'events#update'
+  delete '/events' => 'events#destroy'
+
+  get '/goals/:token' => 'goals#index'
+  post '/goals/new' => 'goals#create'
+  post '/goals/update' => 'goals#update'
+  delete '/goals' => 'goals#destroy'
+
+  get '/summary' => 'calculations#summary'
+  post '/expense' => 'calculations#create'
+
+  root 'users#new'
 end
