@@ -13,13 +13,5 @@ Rails.application.routes.draw do
   post '/events/update/:token' => 'events#update'
   delete '/events' => 'events#destroy'
 
-  get '/goals/:token' => 'goals#index'
-  post '/goals/new' => 'goals#create'
-  post '/goals/update' => 'goals#update'
-  delete '/goals' => 'goals#destroy'
-
-  get '/summary' => 'calculations#summary'
-  post '/expense' => 'calculations#create'
-
   root 'users#new'
 end
