@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   post '/events/update/:token' => 'events#update'
   delete '/events' => 'events#destroy'
 
-  root 'users#new'
+  root 'sessions#new'
 end
