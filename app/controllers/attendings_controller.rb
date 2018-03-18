@@ -1,20 +1,11 @@
 class AttendingsController < ApplicationController
-  before_action :set_event, only: [:index, :show, :new, :edit, :update, :create, :destroy]
+  before_action :set_attending, only: [:index, :show, :new, :edit, :create, :destroy]
 
   def index
     attendee = User.find_by(access_token:params[:token])
+    event = Event.find_by(access_token:params[:event_token])
     attendings = attendee.attendings
     render json:attendings
-  end
-
-  def update
-    attendee = User.find_by(access_token:params[:token])
-    event = Event.find_by(access_token:params[:event_token])
-
-    attending = attendee.attendings.find_by(id:params[:id]).update_attendings(
-      attendee_id: attendee.id,
-      event_id: event.id)
-      render json: user, status: 200
   end
 
   def show
@@ -29,6 +20,7 @@ class AttendingsController < ApplicationController
     # POST /events
   def create
     attendee = User.find_by(access_token:params[:token])
+    event = Event.find_by(access_token:params[:event_token])
     attending = Attending.new(
       attendee_id: attendee.id,
       event_id: event.id)
@@ -41,18 +33,25 @@ class AttendingsController < ApplicationController
 
  # GET /users/1/edit
   def edit
-    creator = User.find_by(access_token:params[:token])
+    attendee = User.find_by(access_token:params[:token])
     event = creator.events.find_by(id:params[:id]).update_attributes(
-      event_name:params[:event_name],
-      date:params[:date],
-      type:params[:type],
-      location:params[:location])
-      render json: user, status: 200
+      attendee_id: attendee.id,
+      event_id: event.id)
+      render json: attending, status: 200
   end
 
     # DELETE /users/1
   def destroy
-    event = Event.find_by(id:params[:id]).destroy
-    render json: event
+    attending = Attending.find_by(id:params[:id]).destroy
+    render json: attending
   end
+
+  private
+    def set_user
+      @user = User.find_by(access_token: params[:access_token])
+    end
+
+    def attending_params
+      params.require(:attending).permit(:creator_id,:event_id)
+    end
 end
