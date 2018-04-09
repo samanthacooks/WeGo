@@ -7,7 +7,9 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
     user = User.find_by(access_token:params[:token]).update_attributes(
       name:params[:name],
       email:params[:email],
-      password:params[:password])
+      password:params[:password],
+      set_categories:params[:set_categories],
+      location:params[:location])
       render json: user, status: 200
   end
 
@@ -37,6 +39,8 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
       user = {
         name: user.name,
         email: user.email,
+        set_categories: user.set_categories,
+        location:params[:location]
       }
       render json: user,  status: 200
   end

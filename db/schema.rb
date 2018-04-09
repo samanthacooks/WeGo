@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20180204233236) do
   create_table "events", force: :cascade do |t|
     t.string "event_name", null: false
     t.date "date", null: false
-    t.string "event_type", null: false
+    t.string "event_category", null: false
     t.string "location", null: false
     t.integer "creator_id", null: false
     t.datetime "created_at", null: false
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 20180204233236) do
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "access_token"
+    t.string "set_categories"
+    t.string "location"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.datetime "created_at", null: false

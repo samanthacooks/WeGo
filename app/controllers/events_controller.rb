@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  require 'eventbrite'
   before_action :set_event, only: [:index, :show, :new, :edit, :update, :create, :destroy]
 
   def index
@@ -12,7 +13,7 @@ class EventsController < ApplicationController
     event = creator.events.find_by(id:params[:id]).update_attributes(
       event_name:params[:event_name],
       date:params[:date],
-      type:params[:type],
+      event_category:params[:event_category],
       location:params[:location])
       render json: user, status: 200
   end
@@ -32,7 +33,7 @@ class EventsController < ApplicationController
     event = Event.new(
       event_name:params[:event_name],
       date:params[:date],
-      type:params[:type],
+      event_category:params[:event_category],
       location:params[:location], 
       creator_id:creator.id
     )
@@ -49,7 +50,7 @@ class EventsController < ApplicationController
     event = creator.events.find_by(id:params[:id]).update_attributes(
       event_name:params[:event_name],
       date:params[:date],
-      type:params[:type],
+      event_category:params[:event_category],
       location:params[:location])
       render json: user, status: 200
   end
