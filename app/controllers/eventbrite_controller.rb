@@ -1,5 +1,8 @@
 class EventbriteController < ApplicationController
-  Eventbrite.token = `DMKKKZCEMF2YV6K7NKLK`
+  require 'Open-URI'
+  require 'json'
+  require 'pp'
+
 
   def index
     Eventbrite.token = `DMKKKZCEMF2YV6K7NKLK`
@@ -7,6 +10,5 @@ class EventbriteController < ApplicationController
     cat = '103, 101, 110'
     Eventbrite::Event.search({categories: cat})
   end
-
-
+ 
 end

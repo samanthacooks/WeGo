@@ -13,5 +13,8 @@ Rails.application.routes.draw do
   post '/events/update/:token' => 'events#update'
   delete '/events' => 'events#destroy'
 
+  get 'eventbrite/index' => 'eventbrite#index'
+  get 'eventbrite/categories' => 'eventbrite#categories'
+
   root 'users#new'
 end
